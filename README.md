@@ -19,3 +19,8 @@ for root, dirs, files in os.walk(r'C:\AusAEM\AusAEM_East_Resources_Corridor_ GA_
             filename  = file
             filename = filename.replace('.sg.data','')
  ```
+
+## Useful libraries
+
+- PyVista
+- PyMeshLAB
