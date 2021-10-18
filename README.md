@@ -24,3 +24,9 @@ for root, dirs, files in os.walk(r'C:\AusAEM\AusAEM_East_Resources_Corridor_ GA_
 
 - PyVista
 - PyMeshLAB
+
+## Voxet Reader
+Note script here :- https://github.com/elygeo/coseis/blob/main/cst/gocad.py
+- junk = voxet(hfile)
+- junk = voxet(hfile, load_props=['1'])
+- junk['1']['PROP']['1']['DATA'].shape
