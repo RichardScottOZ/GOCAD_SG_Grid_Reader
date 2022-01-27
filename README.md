@@ -36,7 +36,8 @@ Note script here :- https://github.com/elygeo/coseis/blob/main/cst/gocad.py
 - Can download a Window executable version
 - Compiling for unix - tested on ubuntu - https://discourse.opengeosys.org/t/steps-to-build-ogs-cli-and-ogs-gui-on-ubuntu-20-04/878/3
 
-ubuntu@ip-112-12-12-112:~/build/release/bin$ ./GocadSGridReader -s SA_Geophysics_Reference_Model_SGrid.sg  -o SA2.vtu
+```bash
+ubuntu@ip-112-12-12-112:~/build/release/bin$ ./GocadSGridReader -s SA_Geophysics_Reference_Model_SGrid.sg  -o SA2.vtu  
 [2022-01-26 22:33:45.987] [ogs] [info] Start reading Gocad SGrid.
 [2022-01-26 22:33:53.510] [ogs] [info] End reading Gocad SGrid.lags@@ums ZPOSITIVE END COORDAXIS_N 383 428 50
 [2022-01-26 22:34:43.447] [ogs] [info] There are 11 properties in the mesh:
@@ -52,3 +53,4 @@ ubuntu@ip-112-12-12-112:~/build/release/bin$ ./GocadSGridReader -s SA_Geophysics
 [2022-01-26 22:34:43.537] [ogs] [info]  SA_Geophysics_AusREM_Crust_rho: (7992586 values) [-99999, 3.4011118412017822]
 [2022-01-26 22:34:43.546] [ogs] [info]  SA_Geophysics_Magnetotellurics_Gawler_Resistivity: (7992586 values) [-99999, 5.930550575256348]
 [2022-01-26 22:34:43.546] [ogs] [info] Writing mesh to 'SA2.vtu'.
+```
