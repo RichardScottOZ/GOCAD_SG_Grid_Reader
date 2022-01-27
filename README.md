@@ -30,3 +30,8 @@ Note script here :- https://github.com/elygeo/coseis/blob/main/cst/gocad.py
 - junk = voxet(hfile)
 - junk = voxet(hfile, load_props=['1'])
 - junk['1']['PROP']['1']['DATA'].shape
+
+## OpenGeoSys
+
+- Can download a Window executable version
+- Compiling for unix - tested on ubuntu - https://discourse.opengeosys.org/t/steps-to-build-ogs-cli-and-ogs-gui-on-ubuntu-20-04/878/3
