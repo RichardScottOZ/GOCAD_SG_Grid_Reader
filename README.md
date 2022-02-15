@@ -35,6 +35,7 @@ Note script here :- https://github.com/elygeo/coseis/blob/main/cst/gocad.py
 
 - Can download a Window executable version
 - Compiling for unix - tested on ubuntu - https://discourse.opengeosys.org/t/steps-to-build-ogs-cli-and-ogs-gui-on-ubuntu-20-04/878/3
+- https://gitlab.opengeosys.org/RichardScottOZ/ogs [with some fixes/notes]
 
 ```bash
 ubuntu@ip-112-12-12-112:~/build/release/bin$ ./GocadSGridReader -s SA_Geophysics_Reference_Model_SGrid.sg  -o SA2.vtu  
