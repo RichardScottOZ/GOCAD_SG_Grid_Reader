@@ -35,8 +35,7 @@ Note script here :- https://github.com/elygeo/coseis/blob/main/cst/gocad.py
 
 - Can download a Window executable version - doesn't work on Windows 10, anyway, for me - some datatype size error, need to work out why, recompile
 e.g.
-```python
-
+```bash
 (gemgis) J:\ogs-6.4.1-107-gbf7c7494de-Windows-10.0.19043-python-3.8.2-utils\bin>GocadSGridReader.exe -s Cloncurry_inversions.sg -o Clonucrry_inversions.vtu
 [2022-02-15 17:58:03.899] [ogs] [info] Start reading Gocad SGrid.
 [2022-02-15 17:58:04.619] [ogs] [error] readBinaryArray(): Error while reading from file 'Cloncurry_inversions_unconst_sus@@'.
