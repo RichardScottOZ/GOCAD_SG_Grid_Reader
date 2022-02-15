@@ -33,7 +33,32 @@ Note script here :- https://github.com/elygeo/coseis/blob/main/cst/gocad.py
 
 ## OpenGeoSys
 
-- Can download a Window executable version
+- Can download a Window executable version - doesn't work on Windows 10, anyway, for me - some datatype size error, need to work out why, recompile
+e.g.
+```python
+
+(gemgis) J:\ogs-6.4.1-107-gbf7c7494de-Windows-10.0.19043-python-3.8.2-utils\bin>GocadSGridReader.exe -s Cloncurry_inversions.sg -o Clonucrry_inversions.vtu
+[2022-02-15 17:58:03.899] [ogs] [info] Start reading Gocad SGrid.
+[2022-02-15 17:58:04.619] [ogs] [error] readBinaryArray(): Error while reading from file 'Cloncurry_inversions_unconst_sus@@'.
+[2022-02-15 17:58:04.619] [ogs] [error] Read different number of values. Expected 1673917, got 517085.
+[2022-02-15 17:58:04.620] [ogs] [error] Reading of element properties file 'Cloncurry_inversions_unconst_sus@@' failed.
+[2022-02-15 17:58:04.736] [ogs] [error] readBinaryArray(): Error while reading from file 'Cloncurry_inversions_unconst_den@@'.
+[2022-02-15 17:58:04.737] [ogs] [error] Read different number of values. Expected 1673917, got 518617.
+[2022-02-15 17:58:04.738] [ogs] [error] Reading of element properties file 'Cloncurry_inversions_unconst_den@@' failed.
+[2022-02-15 17:58:04.739] [ogs] [error] readRegionFlagsBinary(): Could not open file '' for input.
+
+[2022-02-15 17:58:04.759] [ogs] [info] End reading Gocad SGrid.
+[2022-02-15 17:58:20.566] [ogs] [info] There are 3 properties in the mesh:
+[2022-02-15 17:58:20.570] [ogs] [info]  RegionFlags: (1673917 values) [-1, -1]
+[2022-02-15 17:58:20.571] [ogs] [info] Mesh property vector 'unconst_den' is empty.
+[2022-02-15 17:58:20.572] [ogs] [info]  unconst_den: Could not get value bounds for property vector.
+[2022-02-15 17:58:20.572] [ogs] [info] Mesh property vector 'unconst_sus' is empty.
+[2022-02-15 17:58:20.574] [ogs] [info]  unconst_sus: Could not get value bounds for property vector.
+[2022-02-15 17:58:20.575] [ogs] [info] Writing mesh to 'Cloncurry_inversions.vtu'.
+```
+
+
+
 - Compiling for unix - tested on ubuntu - https://discourse.opengeosys.org/t/steps-to-build-ogs-cli-and-ogs-gui-on-ubuntu-20-04/878/3
 - https://gitlab.opengeosys.org/RichardScottOZ/ogs [with some fixes/notes]
 
