@@ -56,8 +56,6 @@ e.g.
 [2022-02-15 17:58:20.575] [ogs] [info] Writing mesh to 'Cloncurry_inversions.vtu'.
 ```
 
-
-
 - Compiling for unix - tested on ubuntu - https://discourse.opengeosys.org/t/steps-to-build-ogs-cli-and-ogs-gui-on-ubuntu-20-04/878/3
 - https://gitlab.opengeosys.org/RichardScottOZ/ogs [with some fixes/notes]
 
@@ -79,3 +77,6 @@ ubuntu@ip-112-12-12-112:~/build/release/bin$ ./GocadSGridReader -s SA_Geophysics
 [2022-01-26 22:34:43.546] [ogs] [info]  SA_Geophysics_Magnetotellurics_Gawler_Resistivity: (7992586 values) [-99999, 5.930550575256348]
 [2022-01-26 22:34:43.546] [ogs] [info] Writing mesh to 'SA2.vtu'.
 ```
+
+- AuScope geomodel repository converts all sorts of GOCAD stuff
+- SGRid example here:- https://github.com/RichardScottOZ/geomodel-2-3dweb - see notebook and chanced gocad_importer.py file for example - dump out their work, turn into vtr [or whatever you like]
