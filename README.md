@@ -79,4 +79,4 @@ ubuntu@ip-112-12-12-112:~/build/release/bin$ ./GocadSGridReader -s SA_Geophysics
 ```
 
 - AuScope geomodel repository converts all sorts of GOCAD stuff
-- SGRid example here:- https://github.com/RichardScottOZ/geomodel-2-3dweb - see notebook and chanced gocad_importer.py file for example - dump out their work, turn into vtr [or whatever you like]
+- SGRid example here:- https://github.com/RichardScottOZ/geomodel-2-3dweb - see notebook and changed gocad_importer.py file for example - dump out their work, turn into vtr [or whatever you like]
