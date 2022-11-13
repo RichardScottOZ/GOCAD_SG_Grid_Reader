@@ -31,6 +31,9 @@ Note script here :- https://github.com/elygeo/coseis/blob/main/cst/gocad.py
 - junk = voxet(hfile, load_props=['1'])
 - junk['1']['PROP']['1']['DATA'].shape
 
+## ASCI Reader class here: -
+- https://github.com/pyvista/pyvista-support/issues/97
+
 ## OpenGeoSys
 - discussion thread https://discourse.opengeosys.org/t/sgrid-reader-error-understanding/893/20
 - Can download a Window executable version - doesn't work on Windows 10, anyway, for me - some datatype size error, need to work out why, recompile
