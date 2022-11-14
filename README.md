@@ -32,7 +32,7 @@ Note script here :- https://github.com/elygeo/coseis/blob/main/cst/gocad.py
 - junk['1']['PROP']['1']['DATA'].shape
 
 ## ASCI Reader class here: -
-- https://github.com/pyvista/pyvista-support/issues/97
+- https://gist.github.com/T4mmi/b0545c0dfd7b60f3e4f15f3b4e54f7e8
 
 ## OpenGeoSys
 - discussion thread https://discourse.opengeosys.org/t/sgrid-reader-error-understanding/893/20
