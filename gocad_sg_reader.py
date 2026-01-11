@@ -20,6 +20,11 @@ from typing import Dict, List, Tuple, Optional, Union
 import warnings
 
 
+# Binary data type configurations for reading property files
+# Format: (numpy dtype string, item size in bytes)
+BINARY_DTYPES = [('f4', 4), ('f8', 8)]  # float32, float64
+
+
 class GocadSGReader:
     """
     A comprehensive reader for Gocad SG (Structured Grid) files.
@@ -253,7 +258,7 @@ class GocadSGReader:
         # Sometimes: 8-byte double
         
         data = None
-        for dtype_name, item_size in [('f4', 4), ('f8', 8)]:
+        for dtype_name, item_size in BINARY_DTYPES:
             if file_size % item_size == 0:
                 count = file_size // item_size
                 
@@ -283,7 +288,7 @@ class GocadSGReader:
         
         if data is None and expected_count is not None:
             # Try loading without size validation - accept any valid float data
-            for dtype_name, item_size in [('f4', 4), ('f8', 8)]:
+            for dtype_name, item_size in BINARY_DTYPES:
                 if file_size % item_size == 0:
                     for byteorder in ['<', '>']:
                         try:

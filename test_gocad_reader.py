@@ -11,6 +11,14 @@ import shutil
 from pathlib import Path
 import numpy as np
 
+# Import the module to test - done here to detect import errors early
+try:
+    from gocad_sg_reader import GocadSGReader
+    READER_AVAILABLE = True
+except ImportError as e:
+    READER_AVAILABLE = False
+    IMPORT_ERROR = str(e)
+
 
 def create_mock_sg_file(output_dir: Path) -> Path:
     """
@@ -86,14 +94,15 @@ def test_header_parsing():
     print("TEST 1: Header Parsing")
     print("=" * 60)
     
+    if not READER_AVAILABLE:
+        print(f"✗ Module import failed: {IMPORT_ERROR}")
+        return False
+    
     temp_dir = Path(tempfile.mkdtemp())
     
     try:
         # Create mock files
         sg_file = create_mock_sg_file(temp_dir)
-        
-        # Import here to avoid issues if module has errors
-        from gocad_sg_reader import GocadSGReader
         
         # Create reader
         reader = GocadSGReader(sg_file)
@@ -129,6 +138,10 @@ def test_binary_reading():
     print("TEST 2: Binary Property Reading")
     print("=" * 60)
     
+    if not READER_AVAILABLE:
+        print(f"✗ Module import failed: {IMPORT_ERROR}")
+        return False
+    
     temp_dir = Path(tempfile.mkdtemp())
     
     try:
@@ -136,8 +149,6 @@ def test_binary_reading():
         dimensions = (10, 20, 5)
         sg_file = create_mock_sg_file(temp_dir)
         binary_file = create_mock_binary_property(temp_dir, dimensions)
-        
-        from gocad_sg_reader import GocadSGReader
         
         # Create reader
         reader = GocadSGReader(sg_file)
@@ -174,6 +185,10 @@ def test_ascii_reading():
     print("TEST 3: ASCII Property Reading")
     print("=" * 60)
     
+    if not READER_AVAILABLE:
+        print(f"✗ Module import failed: {IMPORT_ERROR}")
+        return False
+    
     temp_dir = Path(tempfile.mkdtemp())
     
     try:
@@ -181,8 +196,6 @@ def test_ascii_reading():
         dimensions = (10, 20, 5)
         sg_file = create_mock_sg_file(temp_dir)
         ascii_file = create_mock_ascii_property(temp_dir, dimensions)
-        
-        from gocad_sg_reader import GocadSGReader
         
         # Create reader
         reader = GocadSGReader(sg_file)
@@ -218,13 +231,15 @@ def test_info_method():
     print("TEST 4: Info Method")
     print("=" * 60)
     
+    if not READER_AVAILABLE:
+        print(f"✗ Module import failed: {IMPORT_ERROR}")
+        return False
+    
     temp_dir = Path(tempfile.mkdtemp())
     
     try:
         # Create mock files
         sg_file = create_mock_sg_file(temp_dir)
-        
-        from gocad_sg_reader import GocadSGReader
         
         # Create reader
         reader = GocadSGReader(sg_file)
@@ -260,6 +275,10 @@ def test_pyvista_integration():
     print("TEST 5: PyVista Integration")
     print("=" * 60)
     
+    if not READER_AVAILABLE:
+        print(f"✗ Module import failed: {IMPORT_ERROR}")
+        return False
+    
     try:
         import pyvista as pv
     except ImportError:
@@ -273,8 +292,6 @@ def test_pyvista_integration():
         dimensions = (10, 20, 5)
         sg_file = create_mock_sg_file(temp_dir)
         binary_file = create_mock_binary_property(temp_dir, dimensions)
-        
-        from gocad_sg_reader import GocadSGReader
         
         # Create reader
         reader = GocadSGReader(sg_file)
