@@ -13,6 +13,8 @@ from typing import Union, List, Optional
 import numpy as np
 import warnings
 
+from gocad_sg_reader import GocadSGReader
+
 
 def export_to_vtk(reader, output_file: Union[str, Path], 
                   properties: Optional[List[str]] = None,
@@ -87,8 +89,6 @@ def batch_convert(input_dir: Union[str, Path],
     list of Path
         Paths to created files
     """
-    from gocad_sg_reader import GocadSGReader
-    
     input_path = Path(input_dir)
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)

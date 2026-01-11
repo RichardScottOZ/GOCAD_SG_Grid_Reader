@@ -21,8 +21,11 @@ import warnings
 
 
 # Binary data type configurations for reading property files
-# Format: (numpy dtype string, item size in bytes)
-BINARY_DTYPES = [('f4', 4), ('f8', 8)]  # float32, float64
+# The reader tries each format in order with both byte orders to auto-detect the correct format:
+# - 'f4' (float32, 4 bytes): Most common format in Gocad binary files
+# - 'f8' (float64, 8 bytes): Less common, used for high-precision data
+# For each type, both little-endian ('<') and big-endian ('>') are attempted
+BINARY_DTYPES = [('f4', 4), ('f8', 8)]
 
 
 class GocadSGReader:
