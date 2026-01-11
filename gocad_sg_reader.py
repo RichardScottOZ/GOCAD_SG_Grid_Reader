@@ -254,14 +254,14 @@ class GocadSGReader:
         # Sometimes: 8-byte double
         
         data = None
-        for dtype_str, item_size in [('float32', 4), ('float64', 8)]:
+        for dtype_name, item_size in [('f4', 4), ('f8', 8)]:
             if file_size % item_size == 0:
                 count = file_size // item_size
                 
                 # Try both byte orders
                 for byteorder in ['<', '>']:  # little-endian, big-endian
                     try:
-                        dtype = np.dtype(byteorder + dtype_str)
+                        dtype = np.dtype(byteorder + dtype_name)
                         test_data = np.fromfile(filepath, dtype=dtype)
                         
                         # Validate the data
@@ -272,7 +272,7 @@ class GocadSGReader:
                             # No validation possible, but data loaded
                             data = test_data
                             warnings.warn(
-                                f"Loaded {len(test_data)} values as {dtype_str} {byteorder} "
+                                f"Loaded {len(test_data)} values as {dtype_name} {byteorder} "
                                 f"(could not validate count)"
                             )
                             break
@@ -283,27 +283,31 @@ class GocadSGReader:
                     break
         
         if data is None and expected_count is not None:
-            # Try loading without size validation
-            for dtype_str, item_size in [('float32', 4), ('float64', 8)]:
-                for byteorder in ['<', '>']:
-                    try:
-                        dtype = np.dtype(byteorder + dtype_str)
-                        data = np.fromfile(filepath, dtype=dtype)
-                        warnings.warn(
-                            f"Loaded {len(data)} values as {dtype_str} {byteorder}, "
-                            f"but expected {expected_count} values"
-                        )
+            # Try loading without size validation - accept any valid float data
+            for dtype_name, item_size in [('f4', 4), ('f8', 8)]:
+                if file_size % item_size == 0:
+                    for byteorder in ['<', '>']:
+                        try:
+                            dtype = np.dtype(byteorder + dtype_name)
+                            test_data = np.fromfile(filepath, dtype=dtype)
+                            if len(test_data) > 0:
+                                data = test_data
+                                if len(test_data) != expected_count:
+                                    warnings.warn(
+                                        f"Loaded {len(data)} values as {dtype_name} {byteorder}, "
+                                        f"but expected {expected_count} values"
+                                    )
+                                break
+                        except Exception:
+                            continue
+                    if data is not None:
                         break
-                    except Exception:
-                        continue
-                if data is not None:
-                    break
         
         if data is None:
             raise ValueError(
                 f"Could not read binary file {filepath}. "
                 f"File size: {file_size} bytes, "
-                f"Expected values: {expected_count}"
+                f"Expected values: {expected_count if expected_count else 'unknown'}"
             )
         
         # Apply no-data masking if specified
