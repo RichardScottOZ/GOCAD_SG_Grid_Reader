@@ -87,7 +87,7 @@ def batch_convert(input_dir: Union[str, Path],
     list of Path
         Paths to created files
     """
-    from .gocad_sg_reader import GocadSGReader
+    from gocad_sg_reader import GocadSGReader
     
     input_path = Path(input_dir)
     output_path = Path(output_dir)

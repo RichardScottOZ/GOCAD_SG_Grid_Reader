@@ -14,7 +14,6 @@ License: MIT
 """
 
 import os
-import struct
 import numpy as np
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional, Union
