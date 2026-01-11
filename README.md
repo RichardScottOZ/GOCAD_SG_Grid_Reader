@@ -1,5 +1,193 @@
 # GOCAD_SG_Grid_Reader
-Simple routine to read a GOCAD SG Grid in ASCII
+Comprehensive Python library to read GOCAD SG (Structured Grid) files in both ASCII and binary formats.
+
+## Overview
+
+This repository provides a user-friendly, efficient Python extractor for Gocad SG grids that handles:
+- **Binary files** (@@) - with proper byte order detection and data type handling
+- **ASCII files** - improved from basic numpy loading
+- **Multiple properties** per grid with automatic detection
+- **Integration with PyVista** for visualization and VTK export
+- **Robust error handling** and validation
+
+This implementation addresses issues found in other tools (e.g., OpenGeoSys C++ reader) and provides a pure Python solution that's easy to use and extend.
+
+## Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/RichardScottOZ/GOCAD_SG_Grid_Reader.git
+cd GOCAD_SG_Grid_Reader
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+## Quick Start
+
+### Basic Usage
+
+```python
+from gocad_sg_reader import GocadSGReader
+
+# Load a Gocad SG grid
+reader = GocadSGReader('path/to/your_grid.sg')
+
+# Display grid information
+print(reader.info())
+
+# Read a specific property
+data = reader.read_property('density')
+
+# Read all properties
+all_data = reader.read_all_properties()
+```
+
+### PyVista Integration
+
+```python
+from gocad_sg_reader import read_sg_grid
+
+# Quick load as PyVista UniformGrid
+grid = read_sg_grid('path/to/your_grid.sg')
+
+# Visualize (requires PyVista)
+grid.plot()
+
+# Export to VTK format
+grid.save('output.vtu')
+```
+
+### Using Utilities
+
+```python
+from gocad_utils import export_to_vtk, summarize_grid_statistics
+
+# Export to VTK
+export_to_vtk(reader, 'output.vtu', file_format='vtu')
+
+# Get statistics
+stats = summarize_grid_statistics(reader)
+```
+
+## Features
+
+### Binary File Support
+
+The reader automatically detects and handles binary property files (@@) with:
+- Multiple data types (float32, float64)
+- Both byte orders (little-endian, big-endian)
+- Proper validation against expected grid dimensions
+- Graceful handling of malformed files
+
+### User-Friendly API
+
+```python
+# Simple convenience function
+grid = read_sg_grid('data.sg')
+
+# Or use the class for more control
+reader = GocadSGReader('data.sg')
+print(reader.info())  # Human-readable summary
+data = reader.read_property('property_name')
+```
+
+### Comprehensive Examples
+
+See `example_usage.py` for detailed examples demonstrating:
+1. Basic usage and grid information
+2. Creating PyVista grids
+3. Property data analysis
+4. Exporting to VTK format
+5. Selective property loading
+6. Computing grid statistics
+
+Run examples:
+```bash
+python example_usage.py path/to/your_grid.sg
+```
+
+## Key Improvements Over Other Tools
+
+### vs. OpenGeoSys C++ Reader
+
+The OpenGeoSys reader had several issues (see below for examples):
+- Binary file reading errors due to incorrect byte order assumptions
+- Poor handling of different data types
+- Missing values causing crashes
+
+This Python implementation:
+- ✅ Automatically detects byte order and data type
+- ✅ Handles malformed files gracefully
+- ✅ Provides clear error messages and warnings
+- ✅ Pure Python - no compilation needed
+
+### vs. Basic numpy.loadtxt
+
+Basic approach (old way):
+```python
+Grid = np.loadtxt(file, skiprows=3)  # ASCII only, no metadata
+```
+
+New approach:
+```python
+reader = GocadSGReader('grid.sg')  # Handles ASCII, binary, metadata
+grid = reader.to_pyvista()  # Full 3D grid with all properties
+```
+
+## API Reference
+
+### GocadSGReader
+
+Main class for reading Gocad SG grids.
+
+**Methods:**
+- `__init__(sg_file)` - Initialize reader with .sg header file
+- `read_property(property_id)` - Read a specific property
+- `read_all_properties()` - Read all properties
+- `to_pyvista(properties_to_load)` - Convert to PyVista UniformGrid
+- `info()` - Get human-readable grid information
+
+**Attributes:**
+- `dimensions` - Grid dimensions (nx, ny, nz)
+- `origin` - Grid origin (x, y, z)
+- `spacing` - Grid spacing (dx, dy, dz)
+- `properties` - Dictionary of available properties
+- `header` - Grid metadata from .sg file
+
+### Utility Functions
+
+From `gocad_utils.py`:
+- `export_to_vtk(reader, output_file, properties, file_format)` - Export to VTK
+- `batch_convert(input_dir, output_dir, file_format)` - Batch process multiple grids
+- `summarize_grid_statistics(reader, properties)` - Compute statistics
+- `extract_slice(reader, axis, index, properties)` - Extract 2D slice
+- `compare_grids(reader1, reader2, property_name)` - Compare two grids
+
+## File Format Support
+
+### Supported Formats
+
+- **.sg** - Header file with grid metadata (required)
+- **@@** - Binary property files (IEEE float32/float64, little/big endian)
+- **ASCII** - Text-based property files
+
+### Example File Structure
+
+```
+my_grid.sg                    # Header file
+my_grid_density@@            # Binary property
+my_grid_susceptibility@@     # Binary property
+my_grid_temperature          # ASCII property (optional)
+```
+
+## Requirements
+
+- Python >= 3.7
+- numpy >= 1.20.0
+- pyvista >= 0.38.0 (optional, for visualization and VTK export)
+
+## Old Documentation (Historical Reference)
 
 ## Basic Idea
 
